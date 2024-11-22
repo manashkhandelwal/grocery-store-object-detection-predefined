@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Detection App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .image-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .image-grid img {
+            width: 200px;
+            height: 150px;
+            object-fit: cover;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .image-grid img:hover {
+            transform: scale(1.05);
+            border-color: #3498db;
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Object Detection App</h1>
+    <p>Select an image to detect objects.</p>
+
+    <div class="image-grid">
+        {% for img in images %}
+        <form action="/process" method="post" style="display: inline-block;">
+            <input type="hidden" name="image_path" value="{{ img }}">
+            <button type="submit" style="border: none; background: none; padding: 0; cursor: pointer;">
+                <img src="{{ img }}" alt="Image {{ loop.index }}">
+            </button>
+        </form>
+        {% endfor %}
+    </div>
+
+    <footer>
+        <p>Built with ❤️ using Flask and YOLOv8. <a href="https://github.com/ultralytics/yolov5" target="_blank">View on GitHub</a></p>
+    </footer>
+</body>
+</html>
